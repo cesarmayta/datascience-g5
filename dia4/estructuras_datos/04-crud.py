@@ -70,6 +70,13 @@ while(True):
         print("=" * ANCHO)
         print(" " * 10 + "ELIMINAR ALUMNO")
         print("=" * ANCHO)
+        dni = input("Ingrese DNI del alumno a eliminar: ")
+        if dni in dic_alumnos:
+            del dic_alumnos[dni]
+            print("Alumno eliminado exitosamente.")
+        else:
+            print("Alumno no encontrado.")
+        
     if opcion == 5:
         print("=" * ANCHO)
         print(" " * 10 + "SALIENDO DEL SISTEMA...")
