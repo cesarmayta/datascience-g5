@@ -48,7 +48,10 @@ class TkAlumno:
         
         ### BOTONES ###
         self.btn_insertar = Button(frame,text="Insertar Nuevo Alumno", command=self.insertar_alumno)
-        self.btn_insertar.grid(row=4,column=0,columnspan=2, pady=10, padx=10)
+        self.btn_insertar.grid(row=4,column=0,columnspan=2)
+        
+        self.btn_eliminar = Button(frame,text='Eliminar Alumno',command=self.eliminar_alumno)
+        self.btn_eliminar.grid(row=5,column=0,columnspan=2)
     
     def insertar_alumno(self):
         dni = self.txt_dni.get()
@@ -58,7 +61,13 @@ class TkAlumno:
         nuevo_alumno = (dni,nombre,email)
         self.tree.insert('',END,values=nuevo_alumno)
         
-        
+    def eliminar_alumno(self):
+        seleccion = self.tree.selection()
+        if seleccion:
+            for item in seleccion:
+                self.tree.delete(item)
+        else:
+            messagebox.showerror('alerta','Por favor seleciones un registro')
         
 app = Tk()
 
