@@ -1,3 +1,0 @@
-Hola Mundo
-Esta es un clase de Python
-hola soy una nueva linea
