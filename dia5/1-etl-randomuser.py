@@ -2,7 +2,9 @@ import requests
 import mysql.connector
 from datetime import datetime
 from tabulate import tabulate
+from prefect import flow,task
 
+@task
 def extract():
     """
     extrae data de randomuser
@@ -15,6 +17,7 @@ def extract():
         
     return data
 
+@task
 def transform(data_users):
     """
     transformamos la data de randomuser
@@ -30,6 +33,7 @@ def transform(data_users):
         
     return data_transformed
 
+@task
 def load(data_to_load):
     resultado = 0
     conn = mysql.connector.connect(
@@ -56,6 +60,7 @@ def load(data_to_load):
     conn.close()
     return resultado
 
+@flow(name='ETL Random User')
 def main():
     data = extract()
     data_transformed = transform(data)
