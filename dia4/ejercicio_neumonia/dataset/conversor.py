@@ -41,4 +41,12 @@ for dir_name in input_dirs:
                     print(f'Imagen comprimida : {output_file_path}')
             except Exception as e:
                 print(f'Error procesando imagenes {file_path} : {e}')
+                
+                
+#CONTAR ARCHIVOS EN CARPETAS DE SALIDA
+for dir_name in input_dirs:
+    for subfolder in ['NORMAL','PNEUMONIA']:
+        output_path = os.path.join(base_output,dir_name,subfolder)
+        file_count = len([f for f in os.listdir(output_path) if os.path.isfile(os.path.join(output_path,f))])
+        print(f'{dir_name}/{subfolder}: {file_count} archivos')
         
