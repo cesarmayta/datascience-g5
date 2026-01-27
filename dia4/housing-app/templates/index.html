@@ -211,11 +211,11 @@
             <p>Selecciona el número de habitaciones para estimar el precio</p>
         </div>
 
-        <form>
+        <form method="POST">
             <div class="form-group">
                 <label for="rooms">Número de Habitaciones</label>
                 <div class="input-wrapper">
-                    <select id="rooms">
+                    <select id="rooms" name="rooms">
                         <option value="">Selecciona una opción</option>
                         <option value="1">1 Habitación</option>
                         <option value="2">2 Habitaciones</option>
@@ -235,15 +235,16 @@
                 <button type="submit" class="btn">Calcular Precio</button>
             </div>
         </form>
-
-        <div class="result-section">
-            <div class="result-label">Precio Estimado</div>
-            <div class="result-price">
-                <span class="currency-symbol">$</span>
-                <span class="price-value">1000</span>
-                <span class="price-currency">USD</span>
+        {% if result > 0 %}
+            <div class="result-section">
+                <div class="result-label">Precio Estimado</div>
+                <div class="result-price">
+                    <span class="currency-symbol">$</span>
+                    <span class="price-value">{{result}}</span>
+                    <span class="price-currency">USD</span>
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 </body>
 </html>
