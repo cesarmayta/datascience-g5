@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicción de Precio de Casas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: white;
+            color: #333;
+            transition: all 0.3s ease;
+            appearance: none;
+            padding-right: 40px;
+        }
+
+        .input-wrapper select:hover {
+            border-color: #667eea;
+        }
+
+        .input-wrapper select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-wrapper::after {
+            content: '▼';
+            position: absolute;
+            right: 15px;
+            color: #667eea;
+            font-size: 12px;
+            pointer-events: none;
+        }
+
+        .button-group {
+            margin-bottom: 35px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .result-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .result-label {
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-price {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .currency-symbol {
+            font-size: 36px;
+            color: #764ba2;
+            font-weight: 700;
+        }
+
+        .price-value {
+            font-size: 48px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .price-currency {
+            font-size: 24px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .price-value {
+                font-size: 40px;
+            }
+
+            .currency-symbol {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .result-section {
+                padding: 20px;
+            }
+
+            .price-value {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Predicción de precio de casas con Machine Learning</h1>
+            <p>Selecciona el número de habitaciones para estimar el precio</p>
+        </div>
+
+        <form>
+            <div class="form-group">
+                <label for="rooms">Número de Habitaciones</label>
+                <div class="input-wrapper">
+                    <select id="rooms">
+                        <option value="">Selecciona una opción</option>
+                        <option value="1">1 Habitación</option>
+                        <option value="2">2 Habitaciones</option>
+                        <option value="3">3 Habitaciones</option>
+                        <option value="4">4 Habitaciones</option>
+                        <option value="5">5 Habitaciones</option>
+                        <option value="6">6 Habitaciones</option>
+                        <option value="7">7 Habitaciones</option>
+                        <option value="8">8 Habitaciones</option>
+                        <option value="9">9 Habitaciones</option>
+                        <option value="10">10 Habitaciones</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn">Calcular Precio</button>
+            </div>
+        </form>
+
+        <div class="result-section">
+            <div class="result-label">Precio Estimado</div>
+            <div class="result-price">
+                <span class="currency-symbol">$</span>
+                <span class="price-value">1000</span>
+                <span class="price-currency">USD</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
