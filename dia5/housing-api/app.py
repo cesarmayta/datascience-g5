@@ -41,7 +41,7 @@ def predict_price(rooms):
     rooms_sc = sc_x.transform(np.array([[rooms]]))
     prediction = model.predict(rooms_sc)
     prediction_sc = sc_y.inverse_transform(prediction) * 1000
-    price = round(prediction_sc[0][0],2)
+    price = round(float(prediction_sc[0][0]),2)
     return price
 
 @app.route('/')
