@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-flask
-=======
-joblib
-numpy
-pandas
-scikit-learn
->>>>>>> 5dc14d1adb9e15b2595f6f0a9ca2f6b664502ca8
