@@ -10,7 +10,7 @@ scaler_y = joblib.load('./model/scaler_y.pkl')
 
 class HousingModel:
   
-  def __init__(self,region,rooms,distance):
+  def __init__(self):
     self.region_name = {
       'Northern Metropolitan': [1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
       'Western Metropolitan': [0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0],
@@ -22,13 +22,10 @@ class HousingModel:
       'Western Victoria': [0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0]
     }
     
-    self.region = region
-    self.rooms = rooms
-    self.distance = distance
 
-  def predict_price(self):
+  def predict_price(self,region,rooms,distance):
     # Ensure new_data is a 2D array for scaling
-    data_list = self.region_name[self.region] + [self.rooms,self.distance]
+    data_list = self.region_name[region] + [rooms,distance]
     new_house_data = np.array(data_list)
     new_data_array = np.array(new_house_data).reshape(1, -1)
 
@@ -39,14 +36,14 @@ class HousingModel:
     # Inverse transform the prediction to get original price scale
     prediction = scaler_y.inverse_transform(prediction_scaled.reshape(1, -1))
 
-    return prediction[0][0] * 1000000
+    return round(prediction[0][0],2) * 1000000
 
 
-region = 'Western Metropolitan'
-rooms = 3
-distance = 5
+# region = 'Western Metropolitan'
+# rooms = 3
+# distance = 5
 
-new_housing = HousingModel(region,rooms,distance)
+# new_housing = HousingModel()
 
-predicted_price = new_housing.predict_price()
-print(f"Predicted Price: {predicted_price:.3f} EUROS")
+# predicted_price = new_housing.predict_price(region,rooms,distance)
+# print(f"Predicted Price: {predicted_price:.3f} EUROS")
